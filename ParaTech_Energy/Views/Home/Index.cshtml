@@ -1,0 +1,317 @@
+﻿@model ParaTech_Energy.Models.GetAllTables
+
+@{
+    ViewBag.Title = "Best Solar Panel Provider Company in Lahore | ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "ParaTech Energy provides the best solar energy solution in Pakistan to reduce electricity bills and improve business productivity with non-stop power.";
+    ViewBag.MetaKeywords = "solar systems ,solar pakistan, ParaTech Energy pakistan, ParaTech Energy, ParaTech Energy pv, ParaTech pakistan,solar energy,home solar,domestic solar,industrial solar,solar installer,solar provider,solar panels,net metering,on grid solar,off grid solar,grid tie,inverex inverter provider,tesla inverter provider,solis inverter provider,jinko panel provider,tier 1 panel provider,a grade solar penal, best solar penal";
+
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<link href="~/App_themes/css/owl.carousel.min.css" rel="stylesheet" />
+<link href="~/App_themes/css/nivo-slider.css" rel="stylesheet" />
+<link href="~/App_themes/css/magific.css" rel="stylesheet" />
+<section>
+        <div id="slider" class="nivoSlider">
+            @foreach (var amage in Model.img.Where(x => x.PageName == "Home" && x.PageLocation == "Top"))
+            {
+                <img class="block" src="@Url.Content(amage.ImagePath)" />
+            }
+        </div>
+</section>
+<section>
+    <div class="container">
+        <div class="top-packages">
+            <hr />
+            <h1 class="title">Solar Packages</h1>
+            <div class="owl-carousel">
+                @foreach (var packg in Model.pkgd.OrderBy(x => x.Price))
+            {
+                    <div class="left detailimage">
+                        <h1 class="text-center detailh" style="color: #00a03c;">@packg.TitleD</h1>
+                        <div class="col-md-5 left asad">
+                            <img class="detailimg" src="@Url.Content(packg.ImageD)" />
+                        </div>
+                        <div class="col-md-7 left">
+                            <h3 class="text-left detailhdn" style="color: #636363;">System Details</h3>
+                            <div class="descrip">
+                                @Html.Raw(packg.DescripD)
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <h5 class="subtitledn text-center" style="color:red;">@packg.SubtitleD</h5>
+                        <div class="clear"></div>
+                        <div class="col-md-12">
+                            <p class="green-button left sub-btn">Price: @packg.Price</p>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="@Url.Action("GetAFreeQuote","Home",new { title=packg.TitleD})" class="green-button quote">Order Now</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>
+@*<section>
+    <div class="services">
+        <div class="container">
+            <hr />
+            <h2 class="title">Our Solar Solutions</h2>
+            @foreach (var proj in Model.projects.Take(4))
+            {
+                <div class="col-md-3 left">
+                    <div class="services-item animation">
+                        <img class="col-md-12 animation block" src="@Url.Content(proj.ProjectImage)" />
+                        <h1>@proj.ProjectName</h1>
+                        <div style="height: 97px; overflow: hidden">@Html.Raw(proj.ProjectDescription)</div>
+                        <a class="more-btn" href="@Url.Action("DetailProject","Home",new { ID=proj.ID})">Explore More</a>
+                    </div>
+                </div>
+            }
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>*@
+<section>
+        <div class="container">
+            <hr />
+            <h1 class="title">Solar Solutions</h1>
+            <!-- Filter Nav START -->
+            @*<div class="filter-wrap p-b30 text-center">
+                <ul class="filter-navigation masonry-filter clearfix">
+                    <li class="active"><a class="btn from-top" data-filter="*" href="#" data-hover="All">All</a></li>
+                    @foreach (var item in Model.projects.GroupBy(x => x.Category))
+                    {
+                        <li class=""><a class="btn from-top" data-filter=".@item.Key.Replace(" ","-")" href="#">@item.Key</a></li>
+                    }
+                </ul>
+            </div>*@
+            <!-- Filter Nav END -->
+            <!-- GALLERY CONTENT START -->
+            <ul id="load-more-item-5" class="masonry-outer mfp-gallery work-grid row clearfix list-unstyled grid-5">
+                <!-- COLUMNS 1 -->
+                @foreach (var item in Model.projects)
+                {
+                    <li class="masonry-item @item.Category.Replace(" ","-") m-b30 animation">
+                        <div class="project-mas hover-shadow">
+                            <div class="image-effect-one">
+                                <img src="@item.ProjectImage.Replace("~","")" alt="">
+                                <div class="figcaption">
+                                    <a class="mfp-link" onclick="ViewProject(@item.ID)" href="javascript:;">
+                                        <i class="fa fa-arrows-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-info p-a20 bg-gray">
+                                <h4 class="sx-tilte m-tb0"><a href="javascript:;">@item.ProjectName</a></h4>
+
+                                <a href="#"><i class="link-plus bg-primary"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div class="clear"></div>
+            <!-- GALLERY CONTENT END -->
+            <a class="project-btn animation" href="@Url.Action("Project","Home")">Show More</a>
+            <div class="clear"></div>
+        </div>
+    <div class="clear"></div>
+</section>
+
+<section>
+    @* <div class="bg-img" style="background:url(../../img/about.jpg) center no-repeat;"> *@
+
+
+    @{
+        var imag = Model.img.FirstOrDefault(x => x.PageName == "Home" && x.PageLocation == "Center");
+        string image = "";
+        if (imag != null)
+        {
+            image = imag.ImagePath;
+        }
+    }
+    <div class="bg-img" style="background:url(../@Url.Content(image)) center no-repeat;">
+        <div class="container">
+            <div class="about-box">
+                <h3>About ParaTech Energy Solutions</h3>
+                <p>Since 2007, over 8,000 households and hundreds of commercial clients across all sectors – including some of the Nation’s biggest brands and iconic buildings – have turned to us to help them achieve huge financial savings and environmental targets through our award winning rooftop solar PV solutions.</p>
+                <p>Our experienced team, both in-house and onsite, are central to our success and it’s their passion and knowledge that inject confidence into our clients for our ability to deliver a full turnkey solution, driven by our consultancy approach to rooftop solar PV.</p>
+                <a class="simple-btn animation mt-50">READ MORE</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <div class="bg-light-gray">
+        <div class="container-fluid">
+            <div class="col-md-6 left">
+                <div class="wwo-img">
+                    <img class="col-md-12 block" src="~/img/hand-world.jpg" />
+                </div>
+            </div>
+            <div class="col-md-6 left">
+                <div class="wwo-content">
+                    <h1>What We Offer</h1>
+                    <h4>We’re the #1 solar energy provider in the Pakistan!</h4>
+                    <p>We’re providing sales and servicing in all of the Pakistan and territories. Our products are the most efficient and reasonably priced in the industry. The  warranties and a production guarantee are provided at no additional cost.</p>
+                    <div class="clear"></div>
+                    <div class="wwo-item">
+                        <div class="wwo-icon left">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div class="wwo-item-txt left">
+                            <h2>Ecology Today</h2>
+                            <p>Commercial Solar Energy Storage</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wwo-item">
+                        <div class="wwo-icon left">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="wwo-item-txt left">
+                            <h2>SavingTechnologies</h2>
+                            <p>Residential Energy Storage</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wwo-item">
+                        <div class="wwo-icon left">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="wwo-item-txt left">
+                            <h2>Plant Ecology</h2>
+                            <p>Other Energy Sources</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="puzzling">
+            <hr />
+            <h2 class="title">Products</h2>
+            <p>Our Top Products!</p>
+            <div class="col-md-3 left">
+                <div class="puzzling-item animation">
+                    <img class="block" src="~/img/Soler-Panel.png" />
+                    <p>Solar Panels</p>
+                </div>
+            </div>
+            <div class="col-md-3 left">
+                <div class="puzzling-item animation">
+                    <img class="block" src="~/img/Inverter.png" />
+                    <p>Inverter</p>
+                </div>
+            </div>
+            <div class="col-md-3 left">
+                <div class="puzzling-item animation">
+                    <img class="block" src="~/img/Battery.jpeg" />
+                    <p>Batteries</p>
+                </div>
+            </div>
+            <div class="col-md-3 left">
+                <div class="puzzling-item animation">
+                    <img class="block" src="~/img/accessories.jpeg" />
+                    <p>Accessories</p>
+                </div>
+            </div>
+            <div class="clear"></div>
+            @*<a class="green-button animation" href="@Url.Action("Solutions","Home")">HOW IT WORKS</a>*@
+        </div>
+    </div>
+    <div class="clear"></div>
+</section>
+<section class="hide865">
+    @{
+        var emg = Model.img.FirstOrDefault(x => x.PageName == "Home" && x.PageLocation == "Bottom");
+        string emage = "";
+        if (emg != null)
+        {
+            emage = emg.ImagePath;
+        }
+    }
+    <div class="solar-quote" style="background:url(../@Url.Content(emage)) no-repeat;">
+        <div class="container">
+            <div class="col-md-6">
+                <div class="solar-quote-txt">
+                    <h1>Get a Free Solar Quote</h1>
+                    <p>Speak With a Solar Expert by calling a</p>
+                    <p><i class="fas fa-phone-volume"></i> 0322-4648732@*<br />042-35733324-25*@</p>
+                    <a class="green-button animation mt-50" style="margin:auto 33%" href="@Url.Action("GetAFreeQuote","Home")">FREE QUOTE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="projectImg" style="display:none;">
+    <div id="project"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+<script src="~/App_themes/js/jquery.nivo.slider.js"></script>
+<script src="~/App_themes/js/owl.carousel.min.js"></script>
+<script src="~/App_themes/js/isotope.pkgd.min.js"></script>
+<script src="~/App_themes/js/magnific-popup.min.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider();
+    });
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        responsiveClass: true,
+        navText: ['<i class="fa fa-angle-left animation"></i>', '<i class="fa fa-angle-right animation"></i>'],
+        responsive: {
+            0: {
+                items: 1,
+                nav: false
+            },
+            600: {
+                items: 1,
+                nav: false
+            },
+            1000: {
+                items: 2,
+                nav: true
+            }
+        }
+    })
+    function ViewProject(id) {
+        var url = "/Home/_ViewProject/" + id; $("#project").load(url, function () {
+            $(".projectImg").show();
+        })
+    }
+    function masonryBox() {
+        if (jQuery().isotope) {
+            var $container = jQuery('.masonry-outer');
+            $container.isotope({
+                itemSelector: '.masonry-item',
+                transitionDuration: '1s',
+                originLeft: true,
+                stamp: '.stamp',
+            });
+
+            jQuery('.masonry-filter li').on('click', function () {
+                var selector = jQuery(this).find("a").attr('data-filter');
+                jQuery('.masonry-filter li').removeClass('active');
+                jQuery(this).addClass('active');
+                $container.isotope({ filter: selector });
+                return false;
+            });
+        };
+    }
+    jQuery(window).on('load', function () {
+        masonryBox()
+    });
+</script>

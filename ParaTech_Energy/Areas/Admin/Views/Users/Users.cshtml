@@ -1,0 +1,121 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.User>
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-lined table-responsive panel-hovered mb20" style="padding-bottom: 20px">
+                <div class="panel-heading left">Administrator Users</div>
+                <a href="@Url.Action("UsersCreate","Users")" class="btn btn-line-info btn-icon-inline right btn-sm" style="margin: 1%;"><i class="ion ion-plus"></i>Add</a>
+                <div class="clearfix"></div>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var us in Model)
+                        {
+                            <tr>
+                                <td>@us.FullName</td>
+                                <td>@us.UserName</td>
+                                <td>@us.Email</td>
+                                <td>
+                                    @if (us.UserImage != null)
+                                    {
+                                        <img src="data:image/jpg;base64,@(Convert.ToBase64String(us.UserImage))" width="80px" />
+                                    }
+                                    else
+                                    {
+                                        <p>no images</p>
+                                    }
+                                </td>
+                                <td>
+                                    @if (us.InActive == true)
+                                    {
+                                        <label class="label label-success">Active</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="label label-default">InActive</label>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("UsersEdit","Users",new { id = us.UserID})" class="btn btn-default ion ion-edit btn-sm"></a>
+                                        <button type="button" onclick="DeleteProduct(@us.UserID)" class="btn btn-pink ion ion-android-delete btn-sm"></button>
+                                        @*<a href="#">
+                                                <i class="ion ion-edit"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="ion ion-android-delete"></i>
+                                            </a>*@
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- #end row -->
+</div> <!-- #end page-wrap -->
+
+
+
+<script src="~/scripts/plugins/sweetalert.min.js"></script>
+<link href="~/scripts/plugins/Sweetalert.css" rel="stylesheet" />
+<script>
+    function DeleteProduct(pid) {
+        if (swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Data!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (Confirm) {
+            if (Confirm) {
+                swal("Deleted!", "Your Data has been deleted. " + pid, "success");
+            var data = { 'UserID': pid }
+            $.post('@Url.Action("UsersDelete", "Users")', data,
+            function (data) {
+                if (data == true)
+                    location.reload();
+        else
+                    alert("Could not delete");
+        });
+        } else {
+                swal("Cancelled", "Your Data is safe :)", "error");
+        }
+        })) {
+        }
+    }
+</script>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.Client>
+@{
+    ViewBag.Title = "Client";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="clear"></div>
+<section>
+    <div class="container" id="box">
+        <div class="col-md-12">
+            <hr />
+            <h2 class="title">Our Valuable Clients are here</h2>
+            <p style="text-align:center">Theirs Valuable feedback about us!</p>
+            <br />
+
+            @foreach (var clnt in Model)
+            {
+                <a href="@Url.Action("ClientDetail","Home",new { ID=clnt.CID})">
+                    <div class="col-md-2" id="left">
+                        <div class="obtainer">
+                            <img class="dynamicImg" src="@Url.Content(clnt.ClientLogo)" />
+
+
+                            <div class="overlay">
+                                <p class="textline" style="width:auto; font:bold">@clnt.CliProjName</p>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    }
+            </div>
+    </div>
+
+    <div class="clear"></div>
+</section>
+<link href="~/App_themes/css/Clientoverlay.css" rel="stylesheet" />
+<div class="clear"></div>

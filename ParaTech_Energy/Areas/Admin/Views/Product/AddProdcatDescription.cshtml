@@ -1,0 +1,78 @@
+﻿@model ParaTech_Energy.Models.ProductCategoryDe
+@{
+    ViewBag.Title = "AddProdcatDescription";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default panel-hovered panel-stacked mb30">
+                <div class="panel-heading">
+                    <p class="left">Add Product Description</p>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("AddProdcatDescription", "Product", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <br />
+
+                        <div class="clearfix"></div>
+
+
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">Product Category</label>
+                                    @Html.DropDownListFor(x => x.ProductcatID, (IEnumerable<SelectListItem>)ViewBag.ProductList, "Select Main Category", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <label class="control-label small">Category Description</label>
+                                <textarea class="form-control note" id="summernote" placeholder="Category Description" name="CategoryDescription" rows="20" style="height:200px">
+                                </textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="clearfix">
+                            <button class="btn btn-primary mr5" type="submit">Submit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+    .panel-heading i {
+        color: #332d2d;
+    }
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            placeholder: 'Write Here',
+            tabsize: 2,
+            height: 300
+        });
+    });
+
+</script>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.Project>
+@{
+    ViewBag.Title = "Projects by ParaTech Energy Solutions";
+    ViewBag.MetaDescription = ": ParaTech Energy Solutions have developed many Projects related to industrial,  commercial domestic usage.";
+    ViewBag.MetaKeywords = "solar panels, solar energy, solar, solar power, solar panel cost, solar panel for house, home solar system, solar cell, solar system, renewable energy, solar plates, Solar motor, solar motor pump , submersible pump, solar water pump, irrigation, Solar tubewell, grid solar energy, off grid solar, hybrid , hybrid system, hybrid solar system, off grid solar system, off grid system, solar inverter, solar plat solar power,";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="clear"></div>
+<section>
+    <div class="container" id="box">
+        <div class="col-md-12">
+            <hr />
+            <h1 class="title">Our Running Projects of Solar Energy</h1>
+            <p style="text-align:center">We'll explain it to you!</p>
+            <br />
+
+            @foreach (var proj in Model)
+            {
+            @*<a href="@Url.Action("DetailProject","Home",new { ID=imag.ID})">
+                <div class="col-md-3" id="left">
+                    <div class="obtainer">
+                        <img class="dynamicImg" src="@Url.Content(imag.ProjectImage)" />
+
+
+                        <div class="overlay">
+                            <div class="textline">@imag.ProjectName</div>
+                        </div>
+                    </div>
+                </div>
+
+            </a>*@
+                    <div class="col-md-3 left">
+                        <div class="services-item animation">
+                            @*<img class="col-md-12 animation block" src="~/img/services.jpg" />*@
+                            <img class="col-md-12 animation block" src="@Url.Content(proj.ProjectImage)" />
+                            <h1>@proj.ProjectName</h1>
+                            <div style="height: 97px; overflow: hidden">@Html.Raw(proj.ProjectDescription)</div>
+                            <a class="more-btn" href="@Url.Action("DetailProject","Home",new { ID=proj.ID})">Explore More</a>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+</section>
+<link href="~/App_themes/css/overlay_image.css" rel="stylesheet" />
+<div class="clear"></div>

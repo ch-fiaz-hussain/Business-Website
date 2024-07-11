@@ -1,0 +1,161 @@
+﻿@model ParaTech_Energy.Models.GetAllTables
+@{
+    ViewBag.Title = "Calculator";
+    ViewBag.MetaDescription = "Solar Load Calculator: Solar system in Pakistan load calculator by ParaTech Energy lets you calculate the load of home appliances for solar consumption and KWH calculation.";
+    ViewBag.MetaKeywords = "Calculator, solar calculator, solar price, solar watts, kwh calculator, consumption calculator, solar panel calculator, electricity load calculator, solar plat,solar panel cost,";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+function submitUserForm() {
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+        return false;
+    }
+    return true;
+}
+
+function verifyCaptcha() {
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+<div class="without-slider"></div>
+<section>
+    @using (Html.BeginForm("Calculator", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "return submitUserForm();" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+
+            <hr />
+            <h2 class="title">Solar Calculator</h2>
+            <p class="title-des text-center mb-50">Calculate your exact Solar Energy requirement by completing the below form, one of our Sales Engineer will contact you soon.</p>
+
+            <p style="color:forestgreen; font:1500; text-align:center">@TempData["Message"]</p>
+            <p style="color:red; font:1500; text-align:center">@TempData["mesage"]</p>
+            <br />
+            @{
+                int i = 0;
+            }
+            @foreach (var data in Model.lstcalculator)
+            {
+                <div class="cal-group">
+                    <div class="cal-item col-md-3 left calcu-label">
+                        <h3>@data.Name</h3>
+                        <p>1 @data.Name = @data.TotalWatts W</p>
+                    </div>
+                    <input type="hidden" value="@data.Name" name="lstcalculatordetail[@i].Name" />
+
+                    <div class="cal-item col-md-6 newmy left">
+                        <label class="control-label small">Quantity:</label>
+                        <label class="control-label small qty-label">Watts:</label><br />
+                        <input type="number" name="lstcalculatordetail[@i].Qty" placeholder="Enter Quantity of  @data.Name" class="cal-item-txt left qty" id="lstcalculatordetail[@i]_Qty" />
+                        <div class="clear"></div>
+                        <input type="number" name="lstcalculatordetail[@i].WattsActual" value="@data.TotalWatts" id="lstcalculatordetail[@i]_totalwatts" placeholder="Enter Watt of @data.Name" class="cal-item-txt left twatts" style="margin:-42px 50%;" />
+
+                    </div>
+                    <div class="cal-item col-md-3 left calcu-total">
+                        <label class="control-label small">Total Watts:</label>
+                        <input type="number" name="Wattstxt" id="lstcalculatordetail[@i]_Watts" placeholder="Total Watts" readonly class="cal-item-txt total" />
+                        <input type="hidden" name="lstcalculatordetail[@i].Watts" value="0" placeholder="Total Watts" class="cal-item-txt total" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                i++;
+            }
+            <div class="cal-group">
+                <div class="cal-item col-md-6 left">
+                    <h3><strong>Sub Total Watts</strong></h3>
+                </div>
+                <div class="cal-item col-md-6 left">
+                    <input type="number" placeholder="Total Watts" class="cal-item-txt totalwatts" style="width:96%" disabled step="any" />
+                    <input type="hidden" name="TotalWatts" class="cal-item-txt totalwatts" step="any" />
+                </div>
+                <div class="clear"></div>
+            </div>
+            <hr class="mt-50" />
+            <h2 class="title">Get A Free Quote</h2>
+            <p class="title-des text-center mb-50">Your personal information for contact</p>
+            <div class="cal-group">
+
+                <div class="cal-item col-md-4 left">
+                    <label>Full Name</label>
+                    <input type="text" name="FullName" placeholder="First Name & Last Name " class="cal-item-txt" required />
+                </div>
+                <div class="cal-item col-md-4 left">
+                    <label>Email</label>
+                    <input type="email" name="Email" id="email" placeholder="Your Correct Email Address" class="cal-item-txt" required />
+                </div>
+                <div class="cal-item col-md-4 left">
+                    <label>Contact Number</label>
+                    <input type="text" name="Phone" placeholder="Your Mobile Number" id="textbox" class="cal-item-txt" required />
+                </div>
+                <div class="clear"></div>
+                <div class="col-md-12" style="margin: 15px 0px;">
+                    <label class="control-label">Your Message</label>
+                    <div class="clear"></div>
+                    <textarea class="cal-item-txt" style="width:97.4%" placeholder="Write Your Message Here.." name="Text" rows="4"></textarea>
+                </div>
+                <div style="margin: 0 auto;display: table;">
+                    <div class="g-recaptcha" data-sitekey="6LfjjMYZAAAAAIEaZxGyy2UTEi0G47Z2LaeDLHIX" data-callback="verifyCaptcha"></div>
+                    <div id="g-recaptcha-error"></div>
+                </div>
+            </div>
+            <button type="submit" class="green-button animation mt-50 mb-50">SEND</button>
+            <br />
+            <br />
+            <br />
+
+
+        </div>
+        <style>
+        </style>
+                }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+    <script>
+        $(".qty").change(function () {
+            var one = parseInt($(this).val() || 0);
+            var two = parseInt($(this).closest("input").nextAll(".twatts").val() || 0);
+            var three = two * one;
+            $(this).parent().siblings().find('.total').val(three);
+
+            var total = 0;
+            $('.cal-item').each(function () {
+                var value = parseInt($('.total', this).val());
+                if (!isNaN(value)) {
+                    total += value;
+                }
+            });
+            $('.totalwatts').val(total);
+        });
+    </script>
+    <script>
+        $(".twatts").change(function () {
+            var one = parseInt($(this).val() || 0);
+            var two = parseInt($(this).closest("input").prevAll(".qty").val() || 0);
+            var three = two * one;
+            $(this).parent().siblings().find('.total').val(three);
+
+            var total = 0;
+            $('.cal-item').each(function () {
+                var value = parseInt($('.total', this).val());
+                if (!isNaN(value)) {
+                    total += value;
+                }
+            });
+            $('.totalwatts').val(total);
+        });
+    </script>
+    <script>
+        $(window).load(function () {
+            var phones = [{ "mask": "+\\92 ###-#######" }, { "mask": "+92 ###-#######" }];
+            $('#textbox').inputmask({
+                mask: phones,
+                greedy: false,
+                definitions: { '#': { validator: "[0-9]", cardinality: 1 } }
+            });
+        })
+    </script>
+</section>

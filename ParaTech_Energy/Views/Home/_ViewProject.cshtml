@@ -1,0 +1,13 @@
+﻿@*<button id="open-popup">Open popup</button>*@
+
+<div id="my-popup" class="mfp-hide white-popup">
+</div>
+<script>
+           $.magnificPopup.open({
+               items:@Html.Raw(ViewBag.depPoints),
+               gallery: {
+                   enabled: true
+               },
+               type: 'image' // this is a default type
+           })
+</script>

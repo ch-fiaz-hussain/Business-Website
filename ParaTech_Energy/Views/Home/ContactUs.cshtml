@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Contact Us :ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "Get in touch with ParaTech Energy to get professional advice related to your solar PV needs and ways to reduce your electricity bills to zero.";
+    ViewBag.MetaKeywords = "Contact, contact us , solar energy , Advantages of solar energy, all about solar energy, solar system in Pakistan price calculator, solar panel price , solar- package, solar inverter, solar invertex,solar system, energy solar";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+function submitUserForm() {
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+        return false;
+    }
+    return true;
+}
+
+function verifyCaptcha() {
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+<br />
+
+    <div class="image">
+            <div class="container">
+                    <div class="contect-title">
+                        <h1>Contact Us</h1>
+                        <p>Get a pricing quote for a residential or business solar panel installation</p>
+                    </div>
+            </div>
+    </div>
+<div class="container">
+    <div class="col-md-3 left con-detail">
+        <div class="detail-mr">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Find Us</h3>
+            <small>Head Office</small>
+            <p style="margin:0;">Y-130 Commercial Area Phase 3 DHA Lahore Cantt</p>
+            <small>Site Office</small>
+            <p style="margin:0;">59/A, Street No.03, Asim Town, Harbancepura, Lahore</p>
+        </div>
+    </div>
+    <div class="col-md-3 left con-detail">
+        <div class="detail-mr">
+            <i class="fas fa-envelope-open-text"></i>
+            <h3>Mail Us</h3>
+            <p><a style="font-size:14px;" href="mailto:info@paratechenergy.com">info@paratechenergy.com</a></p>
+            </div>
+        </div>
+    <div class="col-md-3 left con-detail">
+        <div class="detail-mr">
+            <i class="fas fa-phone-volume"></i>
+            <h3>Call Us</h3>
+            <small>Muhammad Munir</small>
+            <p style="margin:0;"><a href="tel:03224648732">0322-4648732</a></p>
+            <small>Office#</small>
+            <p style="margin:0;"><a href="tel:042-35733324">042-35733324-25</a></p>
+            </div>
+        </div>
+    <div class="col-md-3 left con-detail">
+        <div class="detail-mr">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Office Time</h3>
+            <p>Mon - Fri</p>
+            <p>09:00 AM to 06:00 PM</p>
+            </div>
+        </div>
+</div>
+<div class="clear"></div>
+<p style="color:forestgreen; font:1500; text-align:center">@TempData["Message"]</p>
+<p style="color:red; font:1500; text-align:center">@TempData["mesage"]</p>
+<section class="container">
+    @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "return submitUserForm();" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="contact-form">
+            <div class="col-md-7">
+                <div class="col-md-10">
+                    <p class="form-head">You can contact us any way that is convenient for you. We are available 24/7 via email. You can also use a quick contact form below or visit our office personally.</p>
+                    <div class="col-md-10">
+                        <label class="control-label">Your Name</label>
+                        <input type="text" class="form-control" name="Name" placeholder="Name">
+                    </div>
+                    <br />
+                    <div class="col-md-10">
+                        <label class="control-label">Your Email</label>
+                        <input type="text" class="form-control" name="Email" placeholder="Email">
+                    </div>
+                    <br />
+                    <div class="col-md-10">
+                        <label class="control-label">Your Contact Information</label>
+                        <input type="number" class="form-control" name="Contact" placeholder="Contact">
+                    </div>
+                    <br />
+                    <div class="col-md-10">
+                        <label class="control-label">Your Subject</label>
+                        <input type="text" class="form-control" name="Subject" placeholder="Subject">
+                    </div>
+                    <br />
+                    <div class="col-md-10">
+                        <label class="control-label">Your Message</label>
+                        <div class="clearfix"></div>
+                        <textarea class="form-control" name="Message" rows="6"></textarea>
+                    </div>
+                    <div class="g-recaptcha" data-sitekey="6LfjjMYZAAAAAIEaZxGyy2UTEi0G47Z2LaeDLHIX" data-callback="verifyCaptcha"></div>
+                    <div id="g-recaptcha-error"></div>
+                    <div class="col-md-1">
+                        <button type="submit" class="green-button animation left" style="margin:16px 0 30px;">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 right">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d505.8404315884477!2d74.37638558913817!3d31.472617820303824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb44c02cdc05c25d7!2sParaTech%20Energy!5e0!3m2!1sen!2s!4v1598434109189!5m2!1sen!2s" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>
+        <div class="clear"></div>
+    }
+</section>
+<div class="follow-bg">
+    <div class="container">
+        <div class="connect">
+            <h3 class="follow-label">Follow Us On Social Media</h3>
+            <ul class="ft-social-icon">
+                <li class="list-media"><a target="_blank" href="https://web.facebook.com/ParatechEnergy"><i class="fab fa-facebook-f" title="Facebook"></i></a></li>
+                <li class="list-media"><a target="_blank" href="https://www.pinterest.com/para_tek/"><i class="fab fa-pinterest-p" title="Pinterest"></i></a></li>
+                <li class="list-media"><a target="_blank" href="https://www.instagram.com/paratech_official/"><i class="fab fa-instagram" title="Instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

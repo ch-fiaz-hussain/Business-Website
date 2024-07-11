@@ -1,0 +1,369 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/fonts/font-awesome/css/font-awesome.min.css">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="~/styles/plugins/c3.css">
+    <link rel="stylesheet" href="~/styles/plugins/waves.css">
+    <link rel="stylesheet" href="~/styles/plugins/perfect-scrollbar.css">
+
+    <link rel="stylesheet" href="~/styles/plugins/select2.css">
+    <link rel="stylesheet" href="~/styles/plugins/bootstrap-colorpicker.css">
+    <link rel="stylesheet" href="~/styles/plugins/bootstrap-slider.css">
+    <link rel="stylesheet" href="~/styles/plugins/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/styles/plugins/summernote.css">
+    <link href="~/styles/Tables.css" rel="stylesheet" />
+
+    <!-- Css/Less Stylesheets -->
+    <link rel="stylesheet" href="~/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="~/styles/main.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,300' rel='stylesheet' type='text/css'>
+
+    <script src="~/scripts/vendors.js"></script>
+    <script src="~/scripts/plugins/d3.min.js"></script>
+    <script src="~/scripts/plugins/c3.min.js"></script>
+    <script src="~/scripts/plugins/screenfull.js"></script>
+    <script src="~/scripts/plugins/perfect-scrollbar.min.js"></script>
+    <script src="~/scripts/plugins/waves.min.js"></script>
+    <script src="~/scripts/plugins/jquery.sparkline.min.js"></script>
+    <script src="~/scripts/plugins/jquery.easypiechart.min.js"></script>
+    <script src="~/scripts/plugins/bootstrap-rating.min.js"></script>
+    <script src="~/scripts/app.js"></script>
+    <script src="~/scripts/index.init.js"></script>
+
+    <script src="~/scripts/plugins/select2.min.js"></script>
+    <script src="~/scripts/plugins/bootstrap-colorpicker.min.js"></script>
+    <script src="~/scripts/plugins/bootstrap-slider.min.js"></script>
+    <script src="~/scripts/plugins/summernote.min.js"></script>
+    <script src="~/scripts/plugins/bootstrap-datepicker.min.js"></script>
+    <script src="~/scripts/form-elements.init.js"></script>
+</head>
+<body id="app" class="app off-canvas">
+
+    <div id="loading">
+        <img src="~/images/Loader.gif" alt="Processing" />
+    </div>
+    <header class="site-head" id="site-head">
+        <ul class="list-unstyled left-elems">
+            <!-- nav trigger/collapse -->
+            <li>
+                <a href="javascript:;" class="nav-trigger ion ion-drag"></a>
+            </li>
+            <!-- #end nav-trigger -->
+            <!-- Search box -->
+            <!-- site-logo for mobile nav -->
+            <li>
+                <div class="site-logo visible-xs">
+                    <a href="javascript:;" class="text-uppercase h3">
+                        <span class="text">ParaTech</span>
+                    </a>
+                </div>
+            </li> <!-- #end site-logo -->
+            <!-- fullscreen -->
+            <li class="fullscreen hidden-xs">
+                <a href="javascript:;"><i class="ion ion-qr-scanner"></i></a>
+
+            </li>	<!-- #end fullscreen -->
+
+        </ul>
+
+        <ul class="list-unstyled right-elems">
+            <!-- profile drop -->
+            <li class="profile-drop hidden-xs dropdown">
+                <a href="javascript:;" data-toggle="dropdown">
+                    @if (ViewBag.userimage != null)
+                    {
+                        <img src="data:image/jpg;base64,@(Convert.ToBase64String(ViewBag.userimage))" alt="admin-pic">
+                    }
+                    else
+                    {
+                        <img src="~/images/default.gif" />
+                    }
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="@Url.Action("ProfileEdit", "Admin", new { id = ViewBag.id })"><span class="ion ion-person">&nbsp;&nbsp;</span>Profile</a></li>
+                    <li><a href="@Url.Action("Logout", "Login")"><span class="ion ion-power">&nbsp;&nbsp;</span>Logout</a></li>
+                </ul>
+            </li>
+            <!-- #end profile-drop -->
+            <!-- sidebar contact -->
+            
+
+        </ul>
+
+    </header>
+    <div class="main-container clearfix">
+        <!-- main-navigation -->
+        <aside class="nav-wrap" id="site-nav" data-perfect-scrollbar>
+            <div class="nav-head">
+                <!-- site logo -->
+                <a href="/" class="site-logo text-uppercase">
+                    <i class="ion ion-disc"></i>
+                    <span class="text">ParaTech</span>
+                </a>
+            </div>
+
+            <!-- Site nav (vertical) -->
+
+            <nav class="site-nav clearfix" role="navigation">
+                <div class="profile clearfix mb15">
+                    @if (ViewBag.userimage != null)
+                    {
+                        <img src="data:image/jpg;base64,@(Convert.ToBase64String(ViewBag.userimage))" alt="admin">
+                    }
+                    else
+                    {
+                        <img src="~/images/default.gif" />
+                    }
+                    <div class="group">
+                        <h5 class="name">@ViewBag.fullname</h5>
+                        <small class="desig text-uppercase">@ViewBag.email</small>
+                    </div>
+                </div>
+
+                <!-- navigation -->
+                <ul class="list-unstyled clearfix nav-list mb15">
+                    <li>
+                        <a href="/">
+                            <i class="ion ion-monitor"></i>
+                            <span class="text">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Content", "Content")">
+                            <i class="ion ion-ios-analytics"></i>
+                            <span class="text">Content</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Users", "Users")">
+                            <i class="ion ion-ios-people"></i>
+                            <span class="text">Admin Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Calculator", "Calculator")">
+                            <i class="ion ion-ios-calculator"></i>
+                            <span class="text">Calculator</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("WebImages", "Content")">
+                            <i class="ion ion-images"></i>
+                            <span class="text">WebImages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Client", "Client")">
+                            <i class="ion ion-person-add"></i>
+                            <span class="text">Clients</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Project", "Project")">
+                            <i class="ion ion-ios-bookmarks"></i>
+                            <span class="text">Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("BlogNews", "Blogs")">
+                            <i class="ion ion-bookmark"></i>
+                            <span class="text">Blogs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Packages", "Package")">
+                            <i class="ion ion-ios-albums"></i>
+                            <span class="text">Packages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("PackDetails", "Package")">
+                            <i class="ion ion-person-add"></i>
+                            <span class="text">Detail Packages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Solution", "Solutions")">
+                            <i class="ion ion-images"></i>
+                            <span class="text">Solutions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ProductCategory", "Product")">
+                            <i class="ion ion-android-boat"></i>
+                            <span class="text">Product Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Products", "Product")">
+                            <i class="ion ion-android-bulb"></i>
+                            <span class="text">Products</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ProductCategoryDescription", "Product")">
+                            <i class="ion ion-android-attach"></i>
+                            <span class="text">Product Category Description</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("FAQ", "FAQs")">
+                            <i class="ion ion-android-attach"></i>
+                            <span class="text">FAQs List</span>
+                        </a>
+                    </li>
+                </ul> <!-- #end navigation -->
+            </nav>
+
+            <!-- nav-foot -->
+            <footer class="nav-foot">
+                <p>2019 &copy; <span>ParaTech</span></p>
+            </footer>
+
+        </aside>
+        <!-- #end main-navigation -->
+        <!-- content-here -->
+        <div class="content-container">
+            <div class="page page-dashboard">
+                <div class="col-md-12">
+                    @if (TempData["Warning"] != null)
+                    {
+                        <div class="alert alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <div>@TempData["Warning"].ToString()</div>
+                        </div>
+                    }
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <div>@TempData["Error"].ToString()</div>
+                        </div>
+                    }
+                    @if (TempData["Done"] != null)
+                    {
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <div>@TempData["Done"].ToString()</div>
+                        </div>
+                    }
+                    @if (TempData["Info"] != null)
+                    {
+                        <div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <div>@TempData["Info"].ToString()</div>
+                        </div>
+                    }
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="site-settings clearfix hidden-xs">
+        <div class="settings clearfix">
+            <div class="trigger ion ion-settings left"></div>
+            <div class="wrapper left">
+                <ul class="list-unstyled other-settings">
+                    <li class="clearfix mb10">
+                        <div class="left small">Nav Horizontal</div>
+                        <div class="md-switch right">
+                            <label>
+                                <input type="checkbox" id="navHorizontal">
+                                <span>&nbsp;</span>
+                            </label>
+                        </div>
+
+
+                    </li>
+                    <li class="clearfix mb10">
+                        <div class="left small">Fixed Header</div>
+                        <div class="md-switch right">
+                            <label>
+                                <input type="checkbox" id="fixedHeader">
+                                <span>&nbsp;</span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="clearfix mb10">
+                        <div class="left small">Nav Full</div>
+                        <div class="md-switch right">
+                            <label>
+                                <input type="checkbox" id="navFull">
+                                <span>&nbsp;</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <hr />
+                <ul class="themes list-unstyled" id="themeColor">
+                    <li data-theme="theme-zero" class="active"></li>
+                    <li data-theme="theme-one"></li>
+                    <li data-theme="theme-two"></li>
+                    <li data-theme="theme-three"></li>
+                    <li data-theme="theme-four"></li>
+                    <li data-theme="theme-five"></li>
+                    <li data-theme="theme-six"></li>
+                    <li data-theme="theme-seven"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+    <script>
+
+        $('#loading').hide();
+        $(document).ready(function () {
+            $('#example,#example2').DataTable();
+        });
+        $(document).ready(function () {
+            $('.page-timeline ul li:nth-child(even)').addClass("on-right");
+
+            $('#DoctorEdit').on('show.bs.modal', function () {
+                $('#Popupdrop').select2();
+            })
+
+            $('#DoctorEdit').on('hidden.bs.modal', function () {
+                $('#Popupdrop').select2('destroy');
+            })
+        });
+        /** add active class and stay opened when selected */
+        var url = window.location;
+
+        // for sidebar menu entirely but not cover treeview
+        $('ul.list-unstyled a').filter(function () {
+            return this.href == url;
+        }).parent().addClass('active');
+
+        // for treeview
+        $('ul.inner-drop a').filter(function () {
+            return this.href == url;
+        }).parentsUntil(".list-unstyled > .inner-drop").addClass('active');
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>

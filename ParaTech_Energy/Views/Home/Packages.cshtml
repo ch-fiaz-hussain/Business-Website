@@ -1,0 +1,59 @@
+﻿@model ParaTech_Energy.Models.GetAllTables
+@{
+    ViewBag.Title = Model.pkgm.TitleM+" Packages by ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "ParaTech Energy offers "+Model.pkgm.TitleM.ToLower() +" solutions price in Pakistan for domestic, commercial and industrial customers. Checkout all solar system packages here";
+    ViewBag.MetaKeywords = "Price in Pakistan, solar system price in Pakistan, solar system price, solar panel price cost of solar system, cost of solar panel, solar plat, solar package, solar panel price, price of solar panel," +Model.pkgm.TitleM.ToLower() + " system," + Model.pkgm.TitleM.ToLower() + " solar system," + Model.pkgm.TitleM.ToLower();
+
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<div class="clear"></div>
+<section>
+    <div class="col-md-12">
+        <div>
+            <img class="pkg-img animation block" src="@Url.Content(Model.pkgm.ImageM)" />
+            <div class="packages-txt"><h1>@Model.pkgm.TitleM</h1></div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr />
+        <div class="block" style="margin-top: 5%; ">
+            <h2 class="title" style="color: #00a03d;">@Model.pkgm.SubtitleM</h2>
+        </div>
+        <br />
+        <div class="col-md-12 packages" style="font-size: 20px;">@Html.Raw(Model.pkgm.DescripM)</div>
+        <h1 class="" style="color: #00a03d;font-size: 41px; text-align: center; line-height: 3.41; ">@Model.pkgm.TitleM</h1>
+        <div class="container">
+
+            @foreach (var packg in Model.pkgd.OrderBy(x=>x.Price).Take(6))
+            {
+                <div class="left detailimage">
+                            <h1 class="text-center detailh" style="color:#00a03c;">@packg.TitleD</h1>
+                    <div class="col-md-5 left asad">
+                        <img class="detailimg" src="@Url.Content(packg.ImageD)" />
+                    </div>
+                    <div class="col-md-7 left">
+                        <h3 class="text-left detailhdn" style="color: #636363;">System Details</h3>
+                        <div class="descrip">
+                            @Html.Raw(packg.DescripD)
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <h5 class="subtitledn text-center" style="color:red;">@packg.SubtitleD</h5>
+                    <div class="clear"></div>
+                            <div class="col-md-12">
+                                <p class="green-button left sub-btn">Price: @packg.Price</p>
+                            </div>
+                            <div class="col-md-12">
+                                <a href="@Url.Action("GetAFreeQuote","Home",new { title=packg.TitleD})" class="green-button quote">Order Now</a>
+                            </div>
+                  </div>
+            }
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</section>
+
+     

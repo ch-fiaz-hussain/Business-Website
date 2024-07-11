@@ -1,0 +1,74 @@
+﻿@model ParaTech_Energy.Models.User
+@{
+    ViewBag.Title = "Users Edit";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <!-- row -->
+    <div class="row">
+
+        <!-- col-left -->
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default panel-hovered panel-stacked mb30">
+                <div class="panel-heading">Edit / Modify User</div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("UsersEdit", "Users", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+                                <!-- form horizontal acts as a row -->
+                                <!-- normal control -->
+                        <input type="hidden" value="@Model.UserID" name="UserID" />
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">Full Name</label>
+                                    <input type="text" class="form-control" name="FullName" value="@Model.FullName" placeholder="Full Name" tabindex="1">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label small">Email</label>
+                                    <input type="text" class="form-control" name="Email" value="@Model.Email" placeholder="Email" tabindex="1">
+                                </div>
+                            </div>
+                        </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label small">User Name</label>
+                                            <input type="text" class="form-control" name="UserName" value="@Model.UserName" placeholder="User Name" tabindex="1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label small">Password</label>
+                                            <input type="text" class="form-control" name="Password" value="@Model.Password" placeholder="Password" tabindex="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label small">User Image <span class="text-danger xsmall">Image Size: 1MB or less</span></label>
+                                            <input type="file" class="form-control" id="File" name="File">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="ui-checkbox ui-checkbox-primary">
+                                        <label>
+                                            @Html.CheckBoxSimple("InActive", new { id = "InActive", @value=Model.InActive })
+                                            <span>Active</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="clearfix">
+                                    <button class="btn btn-primary mr5" type="submit">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                </div>
+                    }
+                </div>
+            </div>
+        </div> <!-- #end col-left -->
+
+    </div>
+</div>
+
+
+

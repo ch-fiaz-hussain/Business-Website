@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.BlogNew>
+@{
+    ViewBag.Title = "Blogs";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="clear"></div>
+<section>
+    <div class="container" id="box">
+        <div class="col-md-12">
+            <hr />
+            <h2 class="title">BLOGS!!!!!</h2>
+            <p style="text-align:center">ParaTech Energy Solutions!</p>
+            <br />
+            @foreach (var blog in Model)
+            {
+            <div class="col-md-3" style="float:left;">
+                <div class="obtainer">
+                    <div class="dynamicImg" id="left">
+                        <p style="text-align:center; margin-top:2%; color:#3edc80">@blog.Title</p>
+
+                        <div class="textli" style="color:black;">@Html.Raw(blog.Description)</div>
+
+                        <p class="bor" style="font-size:small; float:right;">@blog.CreateDate.ToString("dd-MMM-yyyy")</p>
+
+                        <div class="descrip">
+                            <a href="@Url.Action("BlogsDetail","Home",new { Id=blog.ID})">
+                                <span class="blog-read float-left">Read More &gt;&gt;</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+
+</section>
+
+<style>
+    .obtainer {
+        position: relative;
+        width: 91%;
+        padding: 10px 1px;
+        height:auto;
+    }
+
+    div#left {
+        FLOAT: RIGHT;
+    }
+
+    div#box {
+        margin: 0 5%
+    }
+    .bor {
+        background-color: rgba(62, 220, 128, 0.40);
+        padding: 3px;
+        border-radius: 15px;
+    }
+    .dynamicImg {
+        width: 98%;
+        background: #efefef;
+        height: auto;
+    }
+
+
+    .textli {
+        margin:2%
+    }
+    .blog-read{
+        margin-left:4%;
+        color:red;
+        
+    }
+        .blog-read:hover {
+            color: #3edc80;
+        }
+    .descrip {
+        margin: 2% -2%;
+    }
+
+</style>
+
+<div class="clear"></div>
+<br />
+<br />
+

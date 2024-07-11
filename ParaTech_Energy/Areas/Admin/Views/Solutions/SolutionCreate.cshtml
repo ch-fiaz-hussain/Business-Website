@@ -1,0 +1,140 @@
+﻿@model ParaTech_Energy.Models.Solution
+@{
+    ViewBag.Title = "Solution Create";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default panel-hovered panel-stacked mb30">
+                <div class="panel-heading">
+                    <p class="left">Add Solution</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("SolutionCreate", "Solutions", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="ui-checkbox ui-checkbox-primary">
+                                    <label>
+                                        @Html.CheckBoxSimple("NewPage", new { id = "NewPage",@onclick= "myFunction()" })
+                                        <span>Add New Page</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group txt" style="display:none;">
+                                    <label class="control-label small">Page Name</label>
+                                    <input type="text" class="form-control" name="PageName" placeholder="Page Name" tabindex="1">
+                                </div>
+                                <div class="form-group ddl">
+                                    <label class="control-label small">Page Name</label>
+                                    @Html.DropDownListFor(x => x.PageName, (IEnumerable<SelectListItem>)ViewBag.PageNameddl, "Select One", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label small">Title</label>
+                                        <input type="text" class="form-control" name="PageTitle" placeholder="Page Title" tabindex="1">
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label large">Image <small class="text-danger"></small></label>
+                                            <input type="file" name="File" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label small">Solution Description</label>
+                                        <div class="clearfix"></div>
+                                        <textarea class="form-control note" id="summernote" name="PageDes" rows="20" style="height:200px"></textarea>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label small">Meta Title</label>
+                                            <input type="text" class="form-control" name="MetaTitle" placeholder="Meta Title" tabindex="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label small">Meta Keywords</label>
+                                            <input type="text" class="form-control" name="MetaKeywords" placeholder="Meta Keywords" tabindex="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label small">Meta Description</label>
+                                            <input type="text" class="form-control" name="MetaDescription" placeholder="Meta Description" tabindex="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <button class="btn btn-primary mr5" type="submit">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .panel-heading i {
+        color: #332d2d;
+    }
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            placeholder: 'Hello Bootstrap 4',
+            tabsize: 2,
+            height: 300
+        });
+    });
+
+    function myFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("NewPage");
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+            $(".txt").show();
+            $(".ddl").hide();
+        } else {
+            $(".txt").hide();
+            $(".ddl").show();
+        }
+    }
+</script>
+

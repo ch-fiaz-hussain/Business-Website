@@ -1,0 +1,74 @@
+﻿@model ParaTech_Energy.Models.GetAllTables
+@{
+
+@*    ViewBag.Title = "Detail";
+    ViewBag.MetaDescription = "";
+    ViewBag.MetaKeywords = "";*@
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+@foreach (var item in Model.projects)
+{
+    <link href="~/App_themes/css/overlay_image.css" rel="stylesheet" />
+
+    <link href="~/App_themes/css/nivo-slider.css" rel="stylesheet" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <hr />
+    ViewBag.Title = item.ProjectName+" Projects of Solar Energy By ParaTech Energy";
+    ViewBag.MetaDescription = "ParaTech Energy Solutions have developed many Projects related to "+item.ProjectName.ToLower()+" usage.";
+    ViewBag.MetaKeywords = "solar panels, solar energy, solar, solar power, solar panel cost, solar panel for house, home solar system, solar cell, solar system, renewable energy, solar plates, Solar motor, solar motor pump , submersible pump, solar water pump, irrigation, Solar tube well, grid solar energy, off grid solar, hybrid , hybrid system, hybrid solar system, off grid solar system, off grid system, solar inverter, solar plat solar power,"+item.ProjectName.ToLower() +", "+item.ProjectName.ToLower()+"solutions";
+    <h1 class="title">@item.ProjectName</h1>
+    <p style="text-align:center">We'll explain it to you!</p>
+    <br />
+    <div style="margin:auto 20%">
+        <div id="slider" class="nivoSlider">
+            @foreach (var items in Model.projectImages)
+            {
+                <img class="block" src="@Url.Content(items.ProjectImg)" />
+
+            }
+        </div>
+    </div>
+
+    <section>
+        <br />
+        <div class="container" id="box">
+            <div class="col-md-12">
+
+                <div class="col-md-12">
+
+                    @Html.Raw(item.ProjectDescription)
+
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="clear"></div>
+    </section>
+    <div class="clear"></div>
+}
+<style>
+    h3.clr {
+        color: #3edc80;
+        display: contents;
+    }
+
+    label.margin {
+        margin: 3%;
+    }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="~/App_themes/js/jquery.nivo.slider.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider();
+    });
+</script>

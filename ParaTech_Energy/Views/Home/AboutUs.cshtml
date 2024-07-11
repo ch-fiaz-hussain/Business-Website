@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.Content>
+@{
+    ViewBag.Title = "About Us: ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "ParaTech Energy aims to make clean, affordable energy a norm in Pakistan, to utilize solar energy and contribute to betterment of energy crisis in Pakistan.";
+    ViewBag.MetaKeywords = "PV Modules in Lahore, Solar Factories in Pakistan, Advantages of solar energy";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<link href="~/App_themes/css/Style.css" rel="stylesheet" />
+<div class="clear"></div>
+<section>
+    <div class="container  contenntofabout" id="box">
+        <div class="col-md-12">
+            @foreach (var cntnt in Model)
+            {
+                <hr />
+                <h1 class="title">@cntnt.Page!!</h1>
+                <p style="text-align:center">ParaTech Energy Solutions!</p>
+                <br />
+                <div class="container">
+                    <link href="~/App_themes/css/Style.css" rel="stylesheet" />
+                    @Html.Raw(cntnt.PContnt)
+                </div>
+                <br />
+
+            }
+        </div>
+    </div>
+
+
+</section>
+
+<style>
+    div#left {
+        FLOAT: RIGHT;
+    }
+
+    div#box {
+        margin: 0 5%;
+    }
+
+
+    .dynamicImg {
+        width: 98%;
+        background: rgba(237, 230, 230, 0.20);
+        height: auto;
+    }
+
+
+    .textli {
+        margin: 2%;
+    }
+</style>
+<link href="~/App_themes/css/Style.css" rel="stylesheet" />
+
+<div class="clear"></div>
+<br />
+<br />
+

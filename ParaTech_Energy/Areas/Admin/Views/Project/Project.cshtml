@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.Project>
+
+@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-lined table-responsive panel-hovered mb20" style="padding-bottom: 20px">
+                <div class="panel-heading left">Project</div>
+                <a href="@Url.Action("ProjectCreate","Project")" class="btn btn-line-info btn-icon-inline right btn-sm" style="margin: 1%;"><i class="ion ion-plus"></i>Add</a>
+                <div class="clearfix"></div>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ProjectName</th>
+                            <th>ProjectImage</th>
+                            <th>ProjectCategory</th>
+                            <th>ProjectContent</th>
+                            <th>ProjectDescription</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pro in Model)
+                        {
+                        <tr>
+                            <td>@pro.ProjectName</td>
+                            <td><img src="@Url.Content(pro.ProjectImage)" style="width:100px" /></td>
+                            <td>@pro.Category</td>
+                            <td>@pro.ContentType</td>
+                            <td>@Html.Raw(pro.ProjectDescription)</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditProject","Project",new { id = pro.ID})" class="btn btn-default ion ion-edit btn-sm"></a>
+                                    <button type="button" onclick="DeleteProduct(@pro.ID)" class="btn btn-pink ion ion-android-delete btn-sm"></button>
+
+                                </div>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ProjectName</th>
+                            <th>ProjectImage</th>
+                            <th>ProjectCategory</th>
+                            <th>ProjectContent</th>
+                            <th>ProjectDescription</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- #end row -->
+    <script src="~/scripts/plugins/sweetalert.min.js"></script>
+    <link href="~/scripts/plugins/Sweetalert.css" rel="stylesheet" />
+</div>
+<script>
+    function DeleteProduct(Id) {
+        if (swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Data!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (Confirm) {
+            if (Confirm) {
+                swal("Deleted!", "Your Data has been deleted. " + Id, "success");
+                var data = { 'ID': Id }
+            $.post('@Url.Action("DeleteProject", "Project")', data,
+            function (data) {
+                if (data == true)
+                    location.reload();
+        else
+                    alert("Could not delete");
+        });
+        } else {
+                swal("Cancelled", "Your Data is safe :)", "error");
+        }
+        })) {
+        }
+    }
+</script>
+

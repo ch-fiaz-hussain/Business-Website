@@ -1,0 +1,100 @@
+﻿@using ParaTech_Energy.Models
+@model IEnumerable<ParaTech_Energy.Models.Product>
+
+@{
+    ViewBag.Title = ViewBag.CatName +" By ParaTech Energy Solutions";
+    ViewBag.MetaDescription = ViewBag.CatName+" We Provides best solar products in Lahore and all over the Pakistan we have different types of solar products and solar solutions";
+    ViewBag.MetaKeywords = "Solar inverter, solar plates, Energy solar, solar water heater, solar heater, solar inverter ,Solar fans, solar bulb, solar led, solar frames, solar cells, power converter, dc converter, ac converter, solar wires, wires, frames, genialized frame,"+ ViewBag.CatName;
+    
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+    Paratech_EnergyEntities db = new Paratech_EnergyEntities();
+}
+<div class="clear"></div>
+
+<section>
+
+    <div class="back-img">
+        <div class="textin">
+            <h1 class="textin-txt">@ViewBag.CatName</h1>
+            <hr style="width:200px" />
+        </div>
+    </div>
+    <div class="container" id="box">
+        <div class="col-md-12">
+
+            @foreach (var pro in Model)
+            {
+
+                <div class="prodimg">
+                    <div class="image">
+                        <img src="@Url.Content(pro.ProductImg)" />
+                        <br />
+                        <a class="green-button" href="#">
+                            <p class="text-center">
+                                <span>Watts:</span>@pro.TotalWatts
+                            </p>
+                        </a>
+                    </div>
+                    <div class="descriptiondisplay">
+                        <div class="col-md-12">
+                            <h4>
+                                @{
+                                    try
+                                    {
+                                        string description = db.ProductCategoryDes.FirstOrDefault(x => x.ProductcatID == pro.ProductcatID).ProDesc;
+                                        @Html.Raw(description)
+                                    }
+                                    catch
+                                    {
+                                        Exception ex;
+                                    }
+                                }
+                            </h4>
+                            <br />
+
+                            <div>
+
+                                @Html.Raw(pro.ProdContent)
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-2" style="float:right; margin-top:-11%">
+                        <img style="width:100px" src="~/images/100-original-150x136.png" />
+                    </div>*@
+                                    <br />
+                                    }
+
+        </div>
+    </div>
+    <style>
+        div.image {
+            width: auto;
+            margin-top: 8%;
+        }
+
+        .image {
+            background-image: none;
+        }
+
+        .back-img {
+            background-image: url('../../images/don3.jpg');
+            height: 300px;
+        }
+
+        .textin-txt {
+            font-size: xx-large;
+            text-align: center;
+            padding-top: 10%;
+            color: #44e8bb;
+        }
+
+    </style>
+
+    <div class="clear"></div>
+</section>
+<div class="clear"></div>
+<br />
+
+

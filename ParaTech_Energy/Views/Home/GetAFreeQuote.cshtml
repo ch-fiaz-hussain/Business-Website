@@ -1,0 +1,116 @@
+﻿@model ParaTech_Energy.Models.FreeQuote
+@{
+    ViewBag.Title = "Get A Free Quote: ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "Ask question about system solar panel system information about solar system price in Pakistan CALL US at number and get lowest solar panel price.";
+    ViewBag.MetaKeywords = "solar cost, solar panel cost, dha Lahore, solar systems solar panel, solar panels for home, solar panels for offices, solar plat,";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+function submitUserForm() {
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+        return false;
+    }
+    return true;
+}
+
+function verifyCaptcha() {
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+<section>
+    <div class="quote-bg">
+        <div class="container-quote">
+            <h1>Order Now</h1>
+            <p>We are available 24/7 via email. You can also use Get A Free Quote form below or visit our office personally.</p>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="container-quote">
+        <div class="quote-area">
+            <div class="col-md-8 left">
+                <div class="quote-form-area">
+                    <h3>Send us your query</h3>
+                    @using (Html.BeginForm("GetAFreeQuote", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "return submitUserForm();" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="quote-form">
+                            <div class="quote-group col-md-6 left">
+                                <label>Name</label>
+                                <input type="text" name="FullName" value="@Model.FullName" placeholder="Full Name" class="qoute-control" required />
+                            </div>
+                            <div class="quote-group col-md-6 left">
+                                <label>Email</label>
+                                <input type="text" name="Email"value="@Model.Email" placeholder="Email Address" class="qoute-control" required />
+                            </div>
+                            <div class="quote-group col-md-6 left">
+                                <label>City</label>
+                                <input type="text" name="City"value="@Model.City" placeholder="City Name" class="qoute-control" />
+                            </div>
+                            <div class="quote-group col-md-6 left">
+                                <label>Phone</label>
+                                <input type="text" name="Phone" value="@Model.Phone" placeholder="Phone Number" id="Phone" class="qoute-control" required />
+                            </div>
+                            <div class="quote-group col-md-12 left">
+                                <label>Package</label>
+                                @Html.DropDownList("Package", (IEnumerable<SelectListItem>)ViewBag.PackageList, "Select a package *", new { @class = "qoute-control", @style = "width:98%;" })
+                            </div>
+                            <div class="quote-group col-md-12 left">
+                                <label>Message</label>
+                                @Html.TextArea("Message",new { @rows = "4", @placeholder = "Your Message", @class="qoute-control col-md-12", @style="width: 98%;"})
+                            </div>
+                            <div class="col-md-6 clear">
+                                <div class="g-recaptcha" data-sitekey="6LfjjMYZAAAAAIEaZxGyy2UTEi0G47Z2LaeDLHIX" data-callback="verifyCaptcha"></div>
+                                <div id="g-recaptcha-error"></div>
+                            </div>
+                            <button type="submit" class="green-button animation left">Send</button>
+                            <div class="clear"></div>
+                            @if (TempData["Message"] != null)
+                            {
+                                <p style="color: #00ad48;">@TempData["Message"]</p>
+                            }
+                            @if (TempData["MessageError"] != null)
+                            {
+                                <p style="color: #c10000;">@TempData["MessageError"]</p>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4 right">
+                <div class="quote-contact">
+                    <h3>Contact Information</h3>
+                    <ul class="ft-info">
+                        <li><a href="tel:03224648732"><i class="fas fa-mobile left"></i> 0322-4648732</a></li>
+                        <li><a href="tel:042-35733324"><i class="fas fa-phone-volume left"></i> 042-35733324-25</a></li>
+                        <li><a href="mailto:info@paratechenergy.com"><i class="fas fa-envelope-open-text"></i> info@paratechenergy.com</a></li>
+                        <li><a target="_blank" href="https://goo.gl/maps/wMeU8SBBtfP2QQLBA"><i style="float:left" class="fas fa-street-view"></i> <div class="address-ft">Y-130 Commercial Area Phase 3 DHA Lahore Cantt</div></a></li>
+                    </ul>
+                    <ul class="social-media">
+                        <li><a href="https://web.facebook.com/ParatechEnergy"><i class="fab fa-facebook" title="Facebook"></i></a></li>
+                        <li><a href="https://www.pinterest.com/para_tek/"><i class="fab fa-pinterest" title="Pinterest"></i></a></li>
+                        <li><a href="https://www.instagram.com/paratech_official/"><i class="fab fa-instagram" title="Instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>
+
+<div class="clear"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+<script>
+        $(window).load(function () {
+            var phones = [{ "mask": "+\\92 ###-#######" }, { "mask": "+92 ###-#######" }];
+            $('#Phone').inputmask({
+                mask: phones,
+                greedy: false,
+                definitions: { '#': { validator: "[0-9]", cardinality: 1 } }
+            });
+        })
+</script>

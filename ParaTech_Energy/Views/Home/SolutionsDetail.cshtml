@@ -1,0 +1,38 @@
+﻿@model ParaTech_Energy.Models.GetAllTables
+@using ParaTech_Energy.Models;
+@{
+    Solution data = ViewBag.PageData;
+    if (!string.IsNullOrEmpty(data.MetaTitle))
+    {
+        ViewBag.Title = data.MetaTitle;
+    }
+    else
+    {
+        ViewBag.Title ="";
+        ViewBag.MetaDescription = "";
+        ViewBag.MetaKeywords = "";
+    }
+    ViewBag.MetaDescription = data.MetaDescription+" Solar Solutions";
+    ViewBag.MetaKeywords = data.MetaKeywords;
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+    <section>
+        <div class="solution-bg">
+            <div class="container">
+                <div class="sl-title">
+                    <h1>@data.PageTitle Solar Solutions</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            @foreach (var item in Model.solution)
+            {
+            <div class="sl-detail">
+                @Html.Raw(item.PageDes)
+            </div>
+            }
+        </div>
+    </section>
+
+
+

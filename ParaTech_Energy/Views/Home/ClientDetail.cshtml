@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.Client>
+@{
+    /**/
+
+    ViewBag.Title = "ClientDetail";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+
+<link href="~/App_themes/css/overlay_image.css" rel="stylesheet" />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@foreach (var clnt in Model)
+{
+<section>
+    <br />
+    <div class="col-md-3" style="margin:auto 45%">
+        <div>
+
+            <img class="block" style="width:38%;" src="@Url.Content(clnt.ClientLogo)" />
+        </div>
+    </div>
+    <hr />
+    <h2 class="title">@clnt.ClientName</h2>
+    <p style="text-align:center">That is for explanation to clear it to you!</p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="col-md-6">
+        <div class="container">
+            <h6 style="margin:auto 10%; font-size: larger;">
+                @clnt.CliProjName
+            </h6>
+        </div>
+    </div>
+    <br />
+    <div class="col-md-12">
+
+        <div class="container" style="margin:auto 9%">
+
+            @Html.Raw(clnt.CliDescription)
+        </div>
+    </div>
+    <div class="clear"></div>
+</section>
+}
+<div class="clear"></div>
+
+
+<style>
+    h3.clr {
+        color: #3edc80;
+        display: contents;
+    }
+
+    label.margin {
+        margin: 3%;
+    }
+</style>
+

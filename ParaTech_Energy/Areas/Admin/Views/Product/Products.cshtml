@@ -1,0 +1,101 @@
+﻿@using ParaTech_Energy.Models;
+@model IEnumerable<ParaTech_Energy.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Paratech_EnergyEntities db = new Paratech_EnergyEntities();
+}
+
+<br />
+<div class="page-wrap">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-lined table-responsive panel-hovered mb20" style="padding-bottom: 20px">
+                <div class="panel-heading left">Products</div>
+                <a href="@Url.Action("AddProducts","Product")" class="btn btn-line-info btn-icon-inline right btn-sm" style="margin: 1%;"><i class="ion ion-plus"></i>Add</a>
+                <div class="clearfix"></div>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ProductImage</th>
+                            <th>Product Content</th>
+                            <th>Total Watts</th>
+                            <th>Product Category Name</th>
+                            <th>Product File</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prod in Model)
+                        {
+                        <tr>
+                            <td><img src="@Url.Content(prod.ProductImg)" style="width:100px" /></td>
+                            <td>@Html.Raw(prod.ProdContent)</td>
+                            <td>@prod.TotalWatts</td>
+                            <td>@prod.ProductCategory.CategoryName</td>
+                            <td><img src="@Url.Content(prod.ProductFile)" style="width:100px" /></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditProducts","Product",new { Id = prod.ID})" class="btn btn-default ion ion-edit btn-sm"></a>
+                                    <button type="button" onclick="DeleteProduct(@prod.ID)" class="btn btn-pink ion ion-android-delete btn-sm"></button>
+
+                                </div>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ProductImage</th>
+                            <th>Product Content</th>
+                            <th>Total Watts</th>
+                            <th>Product Category Name</th>
+                            <th>Product File</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- #end row -->
+    <script src="~/scripts/plugins/sweetalert.min.js"></script>
+    <link href="~/scripts/plugins/Sweetalert.css" rel="stylesheet" />
+</div>
+<script>
+    function DeleteProduct(dID) {
+        if (swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Data!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (Confirm) {
+            if (Confirm) {
+                swal("Deleted!", "Your Data has been deleted. " + dID, "success");
+                var data = { 'pID': dID }
+            $.post('@Url.Action("DeleteProducts", "Product")', data,
+            function (data) {
+                if (data == true)
+                    location.reload();
+        else
+                    alert("Could not delete");
+        });
+        } else {
+                swal("Cancelled", "Your Data is safe :)", "error");
+        }
+        })) {
+        }
+    }
+</script>
+
+

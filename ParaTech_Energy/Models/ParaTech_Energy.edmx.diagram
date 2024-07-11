@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b0b05ade77414836999eef0c9913b237" Name="Diagram1">
+        <EntityTypeShape EntityType="Paratech_EnergyModel.BlogNew" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.Calculator" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.Client" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.Content" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.Product" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.ProductCategory" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.ProductCategoryDe" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.Project" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.ProjectImage" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.User" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.WebImage" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="Paratech_EnergyModel.FK_Product_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Paratech_EnergyModel.FK_ProductCategoryDes_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Paratech_EnergyModel.FK_ProjectImages_Project" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.SolarPackageM" Width="1.5" PointX="10.375" PointY="1" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.SolarPackageD" Width="1.5" PointX="12.625" PointY="0.75" />
+        <AssociationConnector Association="Paratech_EnergyModel.FK_SolarPackageD_SolarPackageM" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.Solution" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Paratech_EnergyModel.FAQ" Width="1.5" PointX="7.375" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

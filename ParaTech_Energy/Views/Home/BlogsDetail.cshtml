@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ParaTech_Energy.Models.BlogNew>
+@{
+    ViewBag.Title = "BlogsDetail";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="clear"></div>
+<section>
+    <div class="container">
+        <div class="col-md-8">
+            @foreach (var blog in Model)
+            {
+                <div class="col-md-12 halfmargin">
+                    <div class="col-md-6">
+                        <hr />
+                        <h1 style="text-align:center; color:#3edc80">@blog.PageName</h1>
+                    </div>
+                    <div class="col-md-3" style="margin-left:21%">
+
+                        <p style="font-size:small; color:#88042e; margin-top:8%">@blog.CreateDate.ToString("dd-MM-yyyy")</p>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="col-md-3">
+                    <p style="font-size:larger; margin-left:10%; color:#3edc80">@blog.Title</p>
+                </div>
+
+                <br />
+
+                <div id="none">
+                    <div class="col-md-5">
+                        @blog.Tags
+                    </div>
+                    <div class="col-md-3">
+                        @blog.Category
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <div id="box">
+                    <div class="col-md-12">
+                        @Html.Raw(blog.Description)
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+    <div class="clear"></div>
+</section>
+<div class="clear"></div>
+<br />
+<style>
+    .halfmargin {
+        margin: auto 50%;
+    }
+    div#none {
+        display: inline-block;
+        padding: 25px;
+    }
+    div#box {
+        margin: 0 3%;
+    }
+</style>

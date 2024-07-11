@@ -1,0 +1,127 @@
+﻿@model ParaTech_Energy.Models.Project
+@{
+    ViewBag.Title = "NewProject";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default panel-hovered panel-stacked mb30">
+                <div class="panel-heading">
+                    <p class="left">New Project</p>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("ProjectCreate", "Project", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">ProjectName</label>
+                                    <input type="text" class="form-control" name="ProjectName" placeholder="ProjectName" tabindex="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">ProjectCategory</label>
+                                    <input type="text" class="form-control" name="Category" placeholder="Category" tabindex="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">Content Type</label>
+                                    <select class="form-control" name="ContentType">
+                                        <option style="display:none"> </option>
+                                        <option value="Top">Top</option>
+                                        <option value="Center">Center</option>
+                                        <option value="Bottom">Bottom</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    <label class="control-label large">Project Image Main <small class="text-danger">size: 800 x 600</small></label>
+                                    <input type="file" name="File" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label large">Project Images <small class="text-danger">size: 1200 x 800</small></label>
+                                    <div class="form-group">
+                                        <input type="file" name="multiple" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <label class="control-label small">Project Description</label>
+                                <div class="clearfix"></div>
+
+                                <textarea class="form-control note" id="summernote" name="ProjectDescription" rows="20" style="height:200px">
+                         </textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix">
+                            <button class="btn btn-primary mr5" type="submit">Submit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+
+
+                    }
+                </div>
+                        </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+
+    .panel-heading i {
+        color: #332d2d;
+    }
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            placeholder: 'Hello Bootstrap 4',
+            tabsize: 2,
+            height: 300
+        });
+    });
+
+</script>
+
+

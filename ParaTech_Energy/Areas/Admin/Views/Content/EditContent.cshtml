@@ -1,0 +1,101 @@
+﻿@model ParaTech_Energy.Models.Content
+
+@{
+    ViewBag.Title = "EditContent";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default panel-hovered panel-stacked mb30">
+                <div class="panel-heading">
+                    <p class="left">Edit Content</p>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("EditContent", "Content", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+                        <input type="hidden" value="@Model.pID" name="pID" />
+
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">Title</label>
+                                    <input type="text" class="form-control" name="Title" value="@Model.Title" placeholder="Title" tabindex="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label small">Page</label>
+                                    <select class="form-control" name="Page">
+                                       <option style="display:none">@Model.Page</option>
+                                       <option value="Home">Home</option>
+                                       <option value="About Us">About Us</option>
+                                       <option value="Solutions">Solutions</option>
+                                       <option value="Products">Products</option>
+                                       <option value="Blogs">Blogs</option>
+                                       <option value="LatestNews">Latest News</option>
+                                       <option value="Contact">Contact</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    <label class="control-label small">Content Text</label>
+                                    <div class="clearfix"></div>
+
+                                    
+                                    <textarea class="form-control" id="summernote" name="CText" style="height:200px">@Model.PContnt</textarea>
+                                            
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="clearfix" style="margin-left: 10px;">
+                            <button class="btn btn-primary mr5" type="submit">Submit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+
+
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+
+    .panel-heading i {
+        color: #332d2d;
+    }
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            placeholder: 'Write Here',
+            tabsize: 2,
+            height: 300
+        });
+    });
+</script>
+

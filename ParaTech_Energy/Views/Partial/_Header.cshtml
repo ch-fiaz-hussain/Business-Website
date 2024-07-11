@@ -1,0 +1,141 @@
+﻿@using ParaTech_Energy.Models
+@{ 
+    Paratech_EnergyEntities db = new Paratech_EnergyEntities();
+    var procat = db.ProductCategories.Where(x=>x.InActive==true && x.CategoryID==null).ToList();
+    var solu = db.Solutions.GroupBy(x=>x.PageName).Select(x=> x.Key).ToList();
+    var procatsub = db.ProductCategories.Where(x => x.InActive == true && x.CategoryID != null).ToList();
+    var pack = db.SolarPackageMs.Where(x => x.InActive == true && x.MID != null).ToList();
+}
+<header>
+    <div class="black-header">
+        <div class="col-md-12">
+            <div class="col-md-3 left headicon">
+                <div class="text-center newmargin" style="margin:3% 0">
+                    <a href="tel:03224648732"><i class="fas fa-phone-volume"></i> 03224648732</a>
+                </div>
+            </div>
+            <div class="col-md-3 left hide950 headicon">
+                <div class="text-center" style="margin:3% 0">
+                    <a href="mailto:info@paratechenergy.com"><i class="fas fa-envelope-open-text"></i><span> Info@paratechenergy.com</span></a>
+                </div>
+            </div>
+            <div class="col-md-3 right headicon">
+                <div id="google_translate_element"></div>
+                <ul class="social-media" style="margin:3px 33%">
+                    <li><a href="https://web.facebook.com/ParatechEnergy"><i class="fab fa-facebook" title="Facebook"></i></a></li>
+                    <li><a href="https://www.pinterest.com/para_tek/"><i class="fab fa-pinterest" title="Pinterest"></i></a></li>
+                    <li><a href="https://www.instagram.com/paratech_official/"><i class="fab fa-instagram" title="Instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 right hide700 headicon">
+                <div class="text-center get-quote animation">
+                    <a href="@Url.Action("ContactUs", "Home")"><i class="fas fa-mouse-pointer"></i> Get A Free Quote</a>
+                </div>
+            </div>
+            
+            
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="white-header">
+
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img class="block" src="~/img/Logo.png" />
+                </a>
+            </div>
+            <div class="resnav">
+                <i class="fas fa-bars right menubar"></i>
+                <div class="clear"></div>
+                <ul class="navigation">
+                    <li><a class="nav-link animation" href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><a class="nav-link animation" href="@Url.Action("AboutUs", "Home")">About us</a></li>
+                    <li class="dropdown">
+                        <div class="nav-link animation">
+                            <a href="#">Solar Packages</a>
+                        </div>
+                        <div class="dropdown-content">
+                                <div class="first-subdrop">
+                                      @foreach (var pak in pack)
+                                      {
+                                        <a href="@Url.Action("Packages", "Home",new { titlem = pak.TitleM.Replace(" ","-").ToLower()})">@pak.TitleM</a>
+                                       }
+                                </div>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <div class="nav-link animation">
+                            <a href="@Url.Action("Solutions", "Home")">Solar Solutions</a>
+                        </div>
+                        <div class="dropdown-content">
+                            @foreach (var pro in solu)
+                            {
+                                <div class="first-subdrop">
+                                    <a href="@Url.Action("SolutionsDetail", "Home",new { title=pro.Replace(" ","-").ToLower()})">@pro</a>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <div class="nav-link animation">
+                            <a href="#">Products</a>
+                        </div>
+                        <div class="dropdown-content">
+                            @foreach (var pro in procat)
+                            {
+                                <div class="first-subdrop">
+                                    <a href="#">@pro.CategoryName</a>
+
+                                    <div class="subdrop">
+                                        <ul class="subdrop-content">
+                                            @foreach (var list in procatsub.Where(x => x.CategoryID == pro.ID))
+                                            {
+                                                <li><a href="@Url.Action("Products", "Home",new { maintitle=pro.CategoryName.Replace(" ","-").ToLower(),title=list.CategoryName.Replace(" ","-").ToLower()})">@list.CategoryName</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </li>
+                    <li><a class="nav-link animation" href="@Url.Action("Project", "Home")">Projects</a></li>
+                    @*<li><a class="nav-link animation" href="@Url.Action("Client", "Home")">Clients</a></li>
+    <li><a class="nav-link animation adjustnav" href="@Url.Action("Blogs", "Home")">Blogs</a></li>*@
+                    <li><a class="nav-link animation" href="@Url.Action("FAQs", "Home")">FAQs</a></li>
+                    <li><a class="nav-link animation" href="@Url.Action("ContactUs", "Home")">Contact</a></li>
+                    <li><a class="nav-link animation adjustnav" href="@Url.Action("GetAFreeQuote", "Home")"><i class="fas fa-shopping-cart"></i></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+</header>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+            var current = location.pathname;
+            $('.navigation li a').each(function () {
+                var $this = $(this);
+                // if the current path is like this link, make it active
+                if ($this.attr('href') === current) {
+                    $this.addClass('active');
+                }
+            })
+</script>
+<script>
+        //AOS.init();
+
+    var stickySidebar = $('.white-header').offset().top;
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > stickySidebar) {
+                $('.white-header').addClass('fixed');
+            }
+            else {
+                $('.white-header').removeClass('fixed');
+
+            }
+        });
+</script>

@@ -1,0 +1,70 @@
+﻿
+@model IEnumerable<ParaTech_Energy.Models.Content>
+@{
+    ViewBag.Title = "Solutions By ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "ParaTech Energy Solutions's provided Solar solutions are the best solution to costly electricity bills, ParaTech Energy Solutions offers affordable solar system price in Pakistan. Get instant quote now!!!";
+    ViewBag.MetaKeywords = "Solar motor, solar motor pump , submersible pump, solar water pump, irrigation,Solar tubwell,grid solar energy, off grid solar, hybrid , hybrid system, hybrid solar system, off grid solar system, off grid system, solar inverter, solar plat solar power, solar panel prices, paratech, energy solar, solar plat, solar solution, solar packages, solar energy.";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="clear"></div>
+<section>
+    <div class="container" id="box">
+        <div class="col-md-12">
+            @foreach (var solut in Model)
+            {
+                <hr />
+                <p class="title" style="text-align:center">ParaTech Energy Solutions!</p>
+                <br />
+                <div class="container">
+                    @Html.Raw(solut.PContnt)
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+
+
+</section>
+
+<style>
+    div#left {
+        FLOAT: RIGHT;
+    }
+
+    div#box {
+        margin: 0 5%
+    }
+
+
+    .dynamicImg {
+        width: 98%;
+        background: rgba(237, 230, 230, 0.20);
+        height: auto;
+    }
+
+
+    .textli {
+        margin: 2%
+    }
+</style>
+
+<div class="clear"></div>
+<br />
+<br />
+
+
+
+
+

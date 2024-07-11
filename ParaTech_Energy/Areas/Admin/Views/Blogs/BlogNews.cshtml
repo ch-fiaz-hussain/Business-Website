@@ -1,0 +1,101 @@
+﻿
+@model IEnumerable<ParaTech_Energy.Models.BlogNew>
+
+@{
+    ViewBag.Title = "Blogs";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-wrap">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-lined table-responsive panel-hovered mb20" style="padding-bottom: 20px">
+                <div class="panel-heading left">Blog and News</div>
+                <a href="@Url.Action("BlogNewsCreate","Blogs")" class="btn btn-line-info btn-icon-inline right btn-sm" style="margin: 1%;"><i class="ion ion-plus"></i>Add</a>
+                <div class="clearfix"></div>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Page Name</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Cateogry</th>
+                            <th>Tags</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var blogs in Model)
+                        {
+                        <tr>
+                            <td>@blogs.PageName</td>
+                            <td>@blogs.Title</td>
+                            <td>@blogs.CreateDate.ToString("dd-MM-yyyy")</td>
+                            <td>@blogs.Category</td>
+                            <td>@blogs.Tags</td>
+                            <td>@Html.Raw(blogs.Description)</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditBlogNews","Blogs",new { Id = blogs.ID })" class="btn btn-default ion ion-edit btn-sm"></a>
+                                    <button type="button" onclick="DeleteProduct(@blogs.ID)" class="btn btn-pink ion ion-android-delete btn-sm"></button>
+
+                                </div>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Page Name</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Cateogry</th>
+                            <th>Tags</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- #end row -->
+    <script src="~/scripts/plugins/sweetalert.min.js"></script>
+    <link href="~/scripts/plugins/Sweetalert.css" rel="stylesheet" />
+</div>
+<script>
+    function DeleteProduct(bid) {
+        if (swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Data!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (Confirm) {
+            if (Confirm) {
+                swal("Deleted!", "Your Data has been deleted. " + bid, "success");
+                var data = { 'bid': bid }
+            $.post('@Url.Action("DeleteBlogNews", "Blogs")', data,
+            function (data) {
+                if (data == true)
+                    location.reload();
+        else
+                    alert("Could not delete");
+        });
+        } else {
+                swal("Cancelled", "Your Data is safe :)", "error");
+        }
+        })) {
+        }
+    }
+</script>
+

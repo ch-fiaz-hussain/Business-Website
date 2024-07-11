@@ -1,0 +1,25 @@
+﻿@model ParaTech_Energy.Models.GetAllTables
+@using ParaTech_Energy.Models;
+@{
+    ViewBag.Title = "FAQs: Solar Energy ParaTech Energy Solutions";
+    ViewBag.MetaDescription = "FAQs related to the solar system, solar energy, solar panels, and solar system related to home, domestic, industrial, commercial, village. All have been answered by ParaTech Energy Solutions.";
+    ViewBag.MetaKeywords = "solar panels, solar energy ,solar ,solar power ,solar panel cost, solar panel for house, home solar system, solar cell, solar system, renewable energy, solar plates";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<section>
+    <div class="faq-bg">
+    </div>
+    <div class="container">
+        <h1 class="faq-title">FAQs (Frequently Asked Question)</h1>
+        @foreach (var item in Model.faqs)
+            {
+            <div class="faq-detail animation">
+                <h1>@item.Question</h1>
+                @Html.Raw(item.Description)
+            </div>
+        }
+    </div>
+</section>
+
+
+
